@@ -30,6 +30,7 @@ type User struct {
 	Avatar string
 }
 
+// initialize
 func Init(address string) error {
 	client := resty.New()
 	res, err := client.R().Get(address + "/jwks")
@@ -67,6 +68,7 @@ func Init(address string) error {
 	return nil
 }
 
+// verify
 func Verify(token string, expectedAud string) (*User, error) {
 	verified, err := jwt.Parse([]byte(token), jwt.WithKey(jwa.RS256(), pubkey))
 	if err != nil {
