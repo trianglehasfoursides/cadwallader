@@ -69,7 +69,7 @@ func Init(address string) error {
 }
 
 // verify
-func Verify(token string, expectedAud string) (*User, error) {
+func Verify(token string) (*User, error) {
 	verified, err := jwt.Parse([]byte(token), jwt.WithKey(jwa.RS256(), pubkey))
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse/verify JWT: %w", err)
